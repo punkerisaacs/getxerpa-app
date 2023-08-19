@@ -15,22 +15,22 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
 from rest_framework import routers
-
-from categories.models import Category
-from transactions.models import Transaction
-
+from rest_framework_nested.routers import NestedDefaultRouter
+from django.urls import path, include
 from categories.views import CategoryViewSet
 from transactions.views import TransactionViewSet
 
 # Routers provide an easy way of automatically determining the URL conf.
-router = routers.DefaultRouter()
+categoryRouter = routers.DefaultRouter()
+categoryRouter.register(r'category', CategoryViewSet, basename='category')
 
-router.register(r'category', CategoryViewSet, basename='category')
-router.register(r'transaction', TransactionViewSet, basename='transaction')
+# Nested router for chapters
+transactionRouter = NestedDefaultRouter(categoryRouter, r'category', lookup='category')
+transactionRouter.register(r'transaction', TransactionViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path(r'api/', include(router.urls)),
+    path(r'api/', include(categoryRouter.urls)),
+    path(r'api/', include(transactionRouter.urls)),
 ]
