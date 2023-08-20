@@ -14,8 +14,7 @@ class Transaction(models.Model):
     ignore = models.BooleanField(default=False)
 
     def hour(self):
-        today = datetime.datetime.now()
-        return today.strftime("%I:%M%p")
+        return self.date.strftime("%I:%M%p")
 
     def __str__(self):
         return "{} - {}".format(self.description, self.id)
