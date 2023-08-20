@@ -1,4 +1,53 @@
 
+# Instruccions - Backend Enviroment
+
+Run the following commands 
+>Use *py* in windows or *python* in linux
+
+```bash
+py -m venv getXerpa
+source getXerpa/scripts/activate
+pip install djangorestframework
+pip install drf-nested-routers
+python -m pip install django-cors-headers
+cd backend
+py manage.py runserver
 ```
-python -m venv tutorial-env
+
+# Endpoints
+
+>Categories
+
+* GET: http://localhost:8000/api/category/
+* GET: http://localhost:8000/api/category/:id/
+* POST: http://localhost:8000/api/category/
+* PUT: http://localhost:8000/api/category/:id/
+* PATCH: http://localhost:8000/api/category/:id/
+* DELETE: http://localhost:8000/api/category/:id/
+
+* GET: http://localhost:8000/api/category/limit_exceeded?exceeded
+- exceeded = 1: return the categories that exceeded the limit
+- exceeded = 0: return the categories that did not exceed the limit
+- send nothing: return both
+
+
+>Transactions
+
+* GET: http://localhost:8000/api/transaction/
+* GET: http://localhost:8000/api/transaction/:id/
+* POST: http://localhost:8000/api/transaction/
+* PUT: http://localhost:8000/api/transaction/:id/
+* PATCH: http://localhost:8000/api/transaction/:id/
+* DELETE: http://localhost:8000/api/transaction/:id/
+
+
+# Instruccions - Forntend Enviroment
+
+Run the following commands 
+
+```bash
+npm i -g @angular/cli
+cd frontend
+npm i
+npm start
 ```

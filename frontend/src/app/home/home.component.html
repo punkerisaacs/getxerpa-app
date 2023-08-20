@@ -1,0 +1,58 @@
+<nav class="navbar navbar-expand-md bg-white navbar-brand fixed-top">
+  <a class="navbar-brand" href="home" style="margin-left: 5%;"><h3>Gastos por categoría</h3></a>
+</nav>
+<div style="margin-top: 100px; display: flex; justify-content: center;">
+  <div  style="min-width: 60%;  height: 100vh">
+    <div *ngFor="let category of categories" class="center-align" style="margin-bottom: 15px;">
+      <a href="#" [routerLink]="['category-detail/', category.id]" style="text-decoration: none;">
+        <div class="card border-light shadow-0" style="background-color: aliceblue; cursor: pointer;">
+          <div class="card-header border-light pb-0" style="display: flex; justify-content: space-between;">
+            <div class="mb-2"> 
+              <strong class="fs-6">{{ category.name }} </strong>
+            </div>
+            <div [hidden]="category.limit > 0">
+              <p class="fs-5 text-dark m-0">${{ category.totalAmount }}</p>
+            </div>
+          </div>
+          <div class="card-body pt-0" [hidden]="category.limit === 0">
+            <div style="display: flex; justify-content: space-between;">
+              <div>
+                <p class="card-text text-secondary fs-6 mb-1">Gastado</p>
+                <div><p class="fs-5 text-dark">${{ category.totalAmount }}</p></div>
+              </div>
+              <div>
+                <p class="card-text text-secondary fs-6 mb-1" style="text-align: right;">límite</p>
+                <div><p class="fs-5 text-dark">${{ category.limit }}</p></div>
+              </div>
+            </div>
+            <div class="progress" style="height: 10px">
+              <div
+                class="progress-bar"
+                role="progressbar"
+                [style.width]="category.spent+'%'"
+                style="background-color: blueviolet;"
+                aria-valuenow=50
+                aria-valuemin="0"
+                aria-valuemax="100"
+              >
+              </div>
+            </div>
+            <div>
+            <p class="m-0 mt-2 text-black-50" style="font-size: 12px;"> {{ category.spent }}% del presupuesto gastado</p>
+            </div>
+          </div>
+
+          <div class="card-body pt-0" [hidden]="category.limit > 0">
+            <div style="display: flex; justify-content: flex-start;">
+              <div>
+                <p class="m-0 mt-1 text-black-50" style="font-size: 15px;">{{ category.transactionCount }} movimientos</p>
+              </div>
+            </div>
+            
+          </div>
+
+        </div>
+      </a>
+    </div>
+  </div>
+</div>

@@ -38,9 +38,6 @@ class Category(models.Model):
         else:
             return int(self.spent() >= 100)
 
-    def __float__(self):
-        return float(self.limit)
-
     def __str__(self):
         return "{} - {}".format(self.name, self.id)
 
