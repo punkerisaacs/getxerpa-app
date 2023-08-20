@@ -4,13 +4,13 @@ from categories.serializers import CategorySerializer
  
 # Serializers define the API representation.
 class TransactionSerializer(serializers.HyperlinkedModelSerializer):
-    category = CategorySerializer(many=False, read_only=True)
+    categoryObject = CategorySerializer(many=False, read_only=True)
 
     class Meta:
         model = Transaction
-        fields = ['description', 'date', 'amount', 'category', 'ignore']
+        fields = ['description', 'date', 'amount', 'category', 'categoryObject', 'ignore']
 
 class TransactionListSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Transaction
-        fields = ['monthName', 'description', 'amount', 'date']
+        fields = ['hour', 'description', 'amount', 'date', 'ignore']

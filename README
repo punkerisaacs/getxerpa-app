@@ -41,7 +41,7 @@ py manage.py runserver
 * DELETE: http://localhost:8000/api/transaction/:id/
 
 
-# Instruccions - Forntend Enviroment
+# Instruccions - Frontend Enviroment
 
 Run the following commands 
 

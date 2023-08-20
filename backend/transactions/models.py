@@ -13,9 +13,9 @@ class Transaction(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     ignore = models.BooleanField(default=False)
 
-    def monthName(self):
+    def hour(self):
         today = datetime.datetime.now()
-        return today.strftime('%B')
+        return today.strftime("%I:%M%p")
 
     def __str__(self):
         return "{} - {}".format(self.description, self.id)

@@ -2,6 +2,8 @@ import { Component, Input, OnInit, Type } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { HttpProviderService } from '../Service/http-provider.service';
+import * as _ from 'lodash';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-category-detail',
@@ -45,7 +47,25 @@ export class CategoryDetailComponent implements OnInit {
       if (data != null && data.body != null) {
         var resultData = data.body;
         if (resultData) {
-          this.transactions = resultData;
+          let groups = _.groupBy(resultData, function (transaction: any) {
+            console.log(transaction)
+            return moment(transaction.date).startOf('day').format();
+          });
+
+          var result = _.map(groups, function(group: any, day:any){
+            return {
+                day: moment(day).isSame(moment(), 'day') ? 'today' : moment(day).format('DD MMMM') ,
+                transactions: group,
+                date: day
+            }
+
+        });
+
+        const sort = _.sortBy(result, function(dateObj) {
+          return dateObj.date;
+        }).reverse()
+
+          this.transactions = sort;
         }
       }
     },
